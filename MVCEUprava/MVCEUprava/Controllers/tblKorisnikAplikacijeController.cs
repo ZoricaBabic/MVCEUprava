@@ -36,6 +36,24 @@ namespace MVCEUprava.Controllers
             return View();
         }
 
+        //Login
+        [HttpPost]
+        public ActionResult LoginUser([Bind(Include = "Email,Password")] tblKorisnikAplikacije tblKorisnikAplikacije)
+        {
+            if(db.tblKorisnikAplikacijes.Where(x=> x.Email == tblKorisnikAplikacije.Email).ToList().Count() == 0)
+            {
+                ModelState.AddModelError("Email", "Napostojeća e-mail adresa.");
+                return View("Login",tblKorisnikAplikacije);
+            }
+
+            if(db.tblKorisnikAplikacijes.Where(x=>x.Email == tblKorisnikAplikacije.Email && x.Password==tblKorisnikAplikacije.Password).ToList().Count() == 1)
+            {
+                return RedirectToAction("Index","tblLicnaKarta");
+            }
+
+            return View();
+        }
+
         // GET: tblKorisnikAplikacije/Details/5
         public ActionResult Details(int? id)
         {
