@@ -129,6 +129,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\tblIzdavalacController.cs" />
+    <Compile Include="Controllers\tblKorisnikAplikacijeController.cs" />
+    <Compile Include="Controllers\tblKorisnikLicneKarteController.cs" />
+    <Compile Include="Controllers\tblLicnaKartaController.cs" />
+    <Compile Include="Controllers\tblOtisakController.cs" />
+    <Compile Include="Controllers\tblPotpisController.cs" />
+    <Compile Include="Controllers\tblSlikasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,14 +144,54 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblIzdavalac.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblKorisnikAplikacije.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblKorisnikLicneKarte.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblLicnaKarta.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblOtisak.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPotpi.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSlika.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\vwIzdavalac.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwKorisnikAplikacije.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwKorisnikLicneKarte.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwLicnaKarta.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lux.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -156,6 +203,12 @@
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -163,9 +216,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\Model1.edmx.diagram">
+    <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -191,6 +244,44 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\tblIzdavalac\Create.cshtml" />
+    <Content Include="Views\tblIzdavalac\Delete.cshtml" />
+    <Content Include="Views\tblIzdavalac\Details.cshtml" />
+    <Content Include="Views\tblIzdavalac\Edit.cshtml" />
+    <Content Include="Views\tblIzdavalac\Index.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Create.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Delete.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Details.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Edit.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Index.cshtml" />
+    <Content Include="Views\tblKorisnikLicneKarte\Create.cshtml" />
+    <Content Include="Views\tblKorisnikLicneKarte\Delete.cshtml" />
+    <Content Include="Views\tblKorisnikLicneKarte\Details.cshtml" />
+    <Content Include="Views\tblKorisnikLicneKarte\Edit.cshtml" />
+    <Content Include="Views\tblKorisnikLicneKarte\Index.cshtml" />
+    <Content Include="Views\tblLicnaKarta\Create.cshtml" />
+    <Content Include="Views\tblLicnaKarta\Delete.cshtml" />
+    <Content Include="Views\tblLicnaKarta\Details.cshtml" />
+    <Content Include="Views\tblLicnaKarta\Edit.cshtml" />
+    <Content Include="Views\tblLicnaKarta\Index.cshtml" />
+    <Content Include="Views\tblOtisak\Create.cshtml" />
+    <Content Include="Views\tblOtisak\Delete.cshtml" />
+    <Content Include="Views\tblOtisak\Details.cshtml" />
+    <Content Include="Views\tblOtisak\Edit.cshtml" />
+    <Content Include="Views\tblOtisak\Index.cshtml" />
+    <Content Include="Views\tblPotpis\Create.cshtml" />
+    <Content Include="Views\tblPotpis\Delete.cshtml" />
+    <Content Include="Views\tblPotpis\Details.cshtml" />
+    <Content Include="Views\tblPotpis\Edit.cshtml" />
+    <Content Include="Views\tblPotpis\Index.cshtml" />
+    <Content Include="Views\tblSlikas\Create.cshtml" />
+    <Content Include="Views\tblSlikas\Delete.cshtml" />
+    <Content Include="Views\tblSlikas\Details.cshtml" />
+    <Content Include="Views\tblSlikas\Edit.cshtml" />
+    <Content Include="Views\tblSlikas\Index.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Login.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\Registration.cshtml" />
+    <Content Include="Views\tblKorisnikAplikacije\VerifyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

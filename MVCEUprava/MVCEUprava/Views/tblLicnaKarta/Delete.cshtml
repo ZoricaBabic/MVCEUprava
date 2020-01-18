@@ -1,0 +1,64 @@
+﻿@model MVCEUprava.Models.tblLicnaKarta
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblLicnaKarta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistarskiBroj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistarskiBroj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumIzdavanja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumIzdavanja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumIsteka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumIsteka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblKorisnikAplikacije.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblKorisnikLicneKarte.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblKorisnikLicneKarte.Ime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

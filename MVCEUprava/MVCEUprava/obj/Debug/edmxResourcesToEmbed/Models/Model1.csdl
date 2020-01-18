@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LicneKarteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LicneKarteDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblIzdavalacs" EntityType="LicneKarteDBModel.tblIzdavalac" />
+    <EntitySet Name="tblKorisnikAplikacijes" EntityType="LicneKarteDBModel.tblKorisnikAplikacije" />
+    <EntitySet Name="tblKorisnikLicneKartes" EntityType="LicneKarteDBModel.tblKorisnikLicneKarte" />
+    <EntitySet Name="tblLicnaKartas" EntityType="LicneKarteDBModel.tblLicnaKarta" />
+    <EntitySet Name="tblOtisaks" EntityType="LicneKarteDBModel.tblOtisak" />
+    <EntitySet Name="tblPotpis" EntityType="LicneKarteDBModel.tblPotpi" />
+    <EntitySet Name="tblSlikas" EntityType="LicneKarteDBModel.tblSlika" />
+    <EntitySet Name="vwIzdavalacs" EntityType="LicneKarteDBModel.vwIzdavalac" />
+    <EntitySet Name="vwKorisnikAplikacijes" EntityType="LicneKarteDBModel.vwKorisnikAplikacije" />
+    <EntitySet Name="vwKorisnikLicneKartes" EntityType="LicneKarteDBModel.vwKorisnikLicneKarte" />
+    <EntitySet Name="vwLicnaKartas" EntityType="LicneKarteDBModel.vwLicnaKarta" />
+    <AssociationSet Name="FK_tblKorisnikAplikacije_tblIzdavalac" Association="LicneKarteDBModel.FK_tblKorisnikAplikacije_tblIzdavalac">
+      <End Role="tblIzdavalac" EntitySet="tblIzdavalacs" />
+      <End Role="tblKorisnikAplikacije" EntitySet="tblKorisnikAplikacijes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLicnaKarta_tblKorisnikAplikacije" Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikAplikacije">
+      <End Role="tblKorisnikAplikacije" EntitySet="tblKorisnikAplikacijes" />
+      <End Role="tblLicnaKarta" EntitySet="tblLicnaKartas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKorisnikLicneKarte_tblOtisak" Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblOtisak">
+      <End Role="tblOtisak" EntitySet="tblOtisaks" />
+      <End Role="tblKorisnikLicneKarte" EntitySet="tblKorisnikLicneKartes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKorisnikLicneKarte_tblPotpis" Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblPotpis">
+      <End Role="tblPotpi" EntitySet="tblPotpis" />
+      <End Role="tblKorisnikLicneKarte" EntitySet="tblKorisnikLicneKartes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKorisnikLicneKarte_tblSlika" Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblSlika">
+      <End Role="tblSlika" EntitySet="tblSlikas" />
+      <End Role="tblKorisnikLicneKarte" EntitySet="tblKorisnikLicneKartes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLicnaKarta_tblKorisnikLicneKarte" Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikLicneKarte">
+      <End Role="tblKorisnikLicneKarte" EntitySet="tblKorisnikLicneKartes" />
+      <End Role="tblLicnaKarta" EntitySet="tblLicnaKartas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblIzdavalac">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblKorisnikAplikacijes" Relationship="LicneKarteDBModel.FK_tblKorisnikAplikacije_tblIzdavalac" FromRole="tblIzdavalac" ToRole="tblKorisnikAplikacije" />
+  </EntityType>
+  <EntityType Name="tblKorisnikAplikacije">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pol" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Jmbg" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Adresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BrojTelefona" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumRodjenja" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Poslodavac" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblIzdavalac" Relationship="LicneKarteDBModel.FK_tblKorisnikAplikacije_tblIzdavalac" FromRole="tblKorisnikAplikacije" ToRole="tblIzdavalac" />
+    <NavigationProperty Name="tblLicnaKartas" Relationship="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikAplikacije" FromRole="tblKorisnikAplikacije" ToRole="tblLicnaKarta" />
+  </EntityType>
+  <EntityType Name="tblKorisnikLicneKarte">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumRodjenja" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Jmbg" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Pol" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Adresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Potpis" Type="Int32" Nullable="false" />
+    <Property Name="Otisak" Type="Int32" Nullable="false" />
+    <Property Name="Slika" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblOtisak" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblOtisak" FromRole="tblKorisnikLicneKarte" ToRole="tblOtisak" />
+    <NavigationProperty Name="tblPotpi" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblPotpis" FromRole="tblKorisnikLicneKarte" ToRole="tblPotpi" />
+    <NavigationProperty Name="tblSlika" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblSlika" FromRole="tblKorisnikLicneKarte" ToRole="tblSlika" />
+    <NavigationProperty Name="tblLicnaKartas" Relationship="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikLicneKarte" FromRole="tblKorisnikLicneKarte" ToRole="tblLicnaKarta" />
+  </EntityType>
+  <EntityType Name="tblLicnaKarta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegistarskiBroj" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumIzdavanja" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DatumIsteka" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="KorisnikLicneKarte" Type="Int32" Nullable="false" />
+    <Property Name="KorisnikAplikacije" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblKorisnikAplikacije" Relationship="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikAplikacije" FromRole="tblLicnaKarta" ToRole="tblKorisnikAplikacije" />
+    <NavigationProperty Name="tblKorisnikLicneKarte" Relationship="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikLicneKarte" FromRole="tblLicnaKarta" ToRole="tblKorisnikLicneKarte" />
+  </EntityType>
+  <EntityType Name="tblOtisak">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Otisak" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tblKorisnikLicneKartes" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblOtisak" FromRole="tblOtisak" ToRole="tblKorisnikLicneKarte" />
+  </EntityType>
+  <EntityType Name="tblPotpi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Potpis" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tblKorisnikLicneKartes" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblPotpis" FromRole="tblPotpi" ToRole="tblKorisnikLicneKarte" />
+  </EntityType>
+  <EntityType Name="tblSlika">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Slika" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tblKorisnikLicneKartes" Relationship="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblSlika" FromRole="tblSlika" ToRole="tblKorisnikLicneKarte" />
+  </EntityType>
+  <EntityType Name="vwIzdavalac">
+    <Key>
+      <PropertyRef Name="Naziv" />
+    </Key>
+    <Property Name="Naziv" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vwKorisnikAplikacije">
+    <Key>
+      <PropertyRef Name="Naziv" />
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Naziv" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+    <Property Name="Expr1" Type="Int32" Nullable="false" />
+    <Property Name="Expr2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Expr3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Expr4" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Expr5" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Jmbg" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BrojTelefona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumRodjenja" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Poslodavac" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vwKorisnikLicneKarte">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Ime" />
+      <PropertyRef Name="Prezime" />
+      <PropertyRef Name="DatumRodjenja" />
+      <PropertyRef Name="Jmbg" />
+      <PropertyRef Name="Pol" />
+      <PropertyRef Name="Adresa" />
+      <PropertyRef Name="Mesto" />
+      <PropertyRef Name="Potpis" />
+      <PropertyRef Name="Otisak" />
+      <PropertyRef Name="Slika" />
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Expr2" />
+      <PropertyRef Name="Expr3" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumRodjenja" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Jmbg" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Pol" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Adresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Potpis" Type="Int32" Nullable="false" />
+    <Property Name="Otisak" Type="Int32" Nullable="false" />
+    <Property Name="Slika" Type="Int32" Nullable="false" />
+    <Property Name="Expr1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Expr2" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Expr3" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vwLicnaKarta">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="RegistarskiBroj" />
+      <PropertyRef Name="DatumIzdavanja" />
+      <PropertyRef Name="DatumIsteka" />
+      <PropertyRef Name="KorisnikAplikacije" />
+      <PropertyRef Name="KorisnikLicneKarte" />
+      <PropertyRef Name="Ime" />
+      <PropertyRef Name="Prezime" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="RegistarskiBroj" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatumIzdavanja" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DatumIsteka" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="KorisnikAplikacije" Type="Int32" Nullable="false" />
+    <Property Name="KorisnikLicneKarte" Type="Int32" Nullable="false" />
+    <Property Name="Ime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Expr1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Expr2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_tblKorisnikAplikacije_tblIzdavalac">
+    <End Type="LicneKarteDBModel.tblIzdavalac" Role="tblIzdavalac" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblKorisnikAplikacije" Role="tblKorisnikAplikacije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIzdavalac">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblKorisnikAplikacije">
+        <PropertyRef Name="Poslodavac" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLicnaKarta_tblKorisnikAplikacije">
+    <End Type="LicneKarteDBModel.tblKorisnikAplikacije" Role="tblKorisnikAplikacije" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblLicnaKarta" Role="tblLicnaKarta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKorisnikAplikacije">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLicnaKarta">
+        <PropertyRef Name="KorisnikAplikacije" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKorisnikLicneKarte_tblOtisak">
+    <End Type="LicneKarteDBModel.tblOtisak" Role="tblOtisak" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblKorisnikLicneKarte" Role="tblKorisnikLicneKarte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOtisak">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblKorisnikLicneKarte">
+        <PropertyRef Name="Otisak" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKorisnikLicneKarte_tblPotpis">
+    <End Type="LicneKarteDBModel.tblPotpi" Role="tblPotpi" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblKorisnikLicneKarte" Role="tblKorisnikLicneKarte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPotpi">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblKorisnikLicneKarte">
+        <PropertyRef Name="Potpis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKorisnikLicneKarte_tblSlika">
+    <End Type="LicneKarteDBModel.tblSlika" Role="tblSlika" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblKorisnikLicneKarte" Role="tblKorisnikLicneKarte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSlika">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblKorisnikLicneKarte">
+        <PropertyRef Name="Slika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLicnaKarta_tblKorisnikLicneKarte">
+    <End Type="LicneKarteDBModel.tblKorisnikLicneKarte" Role="tblKorisnikLicneKarte" Multiplicity="1" />
+    <End Type="LicneKarteDBModel.tblLicnaKarta" Role="tblLicnaKarta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKorisnikLicneKarte">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLicnaKarta">
+        <PropertyRef Name="KorisnikLicneKarte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

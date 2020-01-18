@@ -1,0 +1,58 @@
+﻿@model MVCEUprava.Models.tblLicnaKarta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblLicnaKarta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistarskiBroj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistarskiBroj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumIzdavanja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumIzdavanja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumIsteka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumIsteka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblKorisnikAplikacije.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblKorisnikLicneKarte.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblKorisnikLicneKarte.Ime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

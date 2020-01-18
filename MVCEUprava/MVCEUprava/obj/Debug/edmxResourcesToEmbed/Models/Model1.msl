@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LicneKarteDBModelStoreContainer" CdmEntityContainer="LicneKarteDBEntities">
+    <EntitySetMapping Name="tblIzdavalacs">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblIzdavalac">
+        <MappingFragment StoreEntitySet="tblIzdavalac">
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKorisnikAplikacijes">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblKorisnikAplikacije">
+        <MappingFragment StoreEntitySet="tblKorisnikAplikacije">
+          <ScalarProperty Name="Poslodavac" ColumnName="Poslodavac" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumRodjenja" ColumnName="DatumRodjenja" />
+          <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+          <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Jmbg" ColumnName="Jmbg" />
+          <ScalarProperty Name="Pol" ColumnName="Pol" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKorisnikLicneKartes">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblKorisnikLicneKarte">
+        <MappingFragment StoreEntitySet="tblKorisnikLicneKarte">
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="Otisak" ColumnName="Otisak" />
+          <ScalarProperty Name="Potpis" ColumnName="Potpis" />
+          <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Pol" ColumnName="Pol" />
+          <ScalarProperty Name="Jmbg" ColumnName="Jmbg" />
+          <ScalarProperty Name="DatumRodjenja" ColumnName="DatumRodjenja" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLicnaKartas">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblLicnaKarta">
+        <MappingFragment StoreEntitySet="tblLicnaKarta">
+          <ScalarProperty Name="KorisnikAplikacije" ColumnName="KorisnikAplikacije" />
+          <ScalarProperty Name="KorisnikLicneKarte" ColumnName="KorisnikLicneKarte" />
+          <ScalarProperty Name="DatumIsteka" ColumnName="DatumIsteka" />
+          <ScalarProperty Name="DatumIzdavanja" ColumnName="DatumIzdavanja" />
+          <ScalarProperty Name="RegistarskiBroj" ColumnName="RegistarskiBroj" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOtisaks">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblOtisak">
+        <MappingFragment StoreEntitySet="tblOtisak">
+          <ScalarProperty Name="Otisak" ColumnName="Otisak" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPotpis">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblPotpi">
+        <MappingFragment StoreEntitySet="tblPotpis">
+          <ScalarProperty Name="Potpis" ColumnName="Potpis" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSlikas">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.tblSlika">
+        <MappingFragment StoreEntitySet="tblSlika">
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwIzdavalacs">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.vwIzdavalac">
+        <MappingFragment StoreEntitySet="vwIzdavalac">
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwKorisnikAplikacijes">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.vwKorisnikAplikacije">
+        <MappingFragment StoreEntitySet="vwKorisnikAplikacije">
+          <ScalarProperty Name="Poslodavac" ColumnName="Poslodavac" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumRodjenja" ColumnName="DatumRodjenja" />
+          <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+          <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Jmbg" ColumnName="Jmbg" />
+          <ScalarProperty Name="Pol" ColumnName="Pol" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Expr5" ColumnName="Expr5" />
+          <ScalarProperty Name="Expr4" ColumnName="Expr4" />
+          <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwKorisnikLicneKartes">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.vwKorisnikLicneKarte">
+        <MappingFragment StoreEntitySet="vwKorisnikLicneKarte">
+          <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="Otisak" ColumnName="Otisak" />
+          <ScalarProperty Name="Potpis" ColumnName="Potpis" />
+          <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Pol" ColumnName="Pol" />
+          <ScalarProperty Name="Jmbg" ColumnName="Jmbg" />
+          <ScalarProperty Name="DatumRodjenja" ColumnName="DatumRodjenja" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwLicnaKartas">
+      <EntityTypeMapping TypeName="LicneKarteDBModel.vwLicnaKarta">
+        <MappingFragment StoreEntitySet="vwLicnaKarta">
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="KorisnikLicneKarte" ColumnName="KorisnikLicneKarte" />
+          <ScalarProperty Name="KorisnikAplikacije" ColumnName="KorisnikAplikacije" />
+          <ScalarProperty Name="DatumIsteka" ColumnName="DatumIsteka" />
+          <ScalarProperty Name="DatumIzdavanja" ColumnName="DatumIzdavanja" />
+          <ScalarProperty Name="RegistarskiBroj" ColumnName="RegistarskiBroj" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

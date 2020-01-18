@@ -21,7 +21,7 @@ namespace MVCEUprava.Models
         }
     
         public int Id { get; set; }
-        public byte[] Naziv { get; set; }
+        public string Naziv { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblKorisnikAplikacije> tblKorisnikAplikacijes { get; set; }

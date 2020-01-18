@@ -18,8 +18,8 @@ namespace MVCEUprava.Models
         public string RegistarskiBroj { get; set; }
         public System.DateTime DatumIzdavanja { get; set; }
         public System.DateTime DatumIsteka { get; set; }
-        public int KorisnikAplikacije { get; set; }
         public int KorisnikLicneKarte { get; set; }
+        public int KorisnikAplikacije { get; set; }
     
         public virtual tblKorisnikAplikacije tblKorisnikAplikacije { get; set; }
         public virtual tblKorisnikLicneKarte tblKorisnikLicneKarte { get; set; }

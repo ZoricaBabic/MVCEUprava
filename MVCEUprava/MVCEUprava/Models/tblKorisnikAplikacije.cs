@@ -28,10 +28,10 @@ namespace MVCEUprava.Models
         public string Adresa { get; set; }
         public string Mesto { get; set; }
         public string BrojTelefona { get; set; }
-        public Nullable<System.DateTime> DatumRodjenja { get; set; }
+        public System.DateTime DatumRodjenja { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public Nullable<int> Poslodavac { get; set; }
+        public int Poslodavac { get; set; }
     
         public virtual tblIzdavalac tblIzdavalac { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

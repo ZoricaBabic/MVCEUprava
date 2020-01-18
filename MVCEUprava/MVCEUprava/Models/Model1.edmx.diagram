@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1517d8954a544745be7989b29dfe253b" Name="Diagram1">
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblIzdavalac" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblKorisnikAplikacije" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblKorisnikLicneKarte" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblLicnaKarta" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblOtisak" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblPotpi" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.tblSlika" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.vwIzdavalac" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.vwKorisnikAplikacije" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.vwKorisnikLicneKarte" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicneKarteDBModel.vwLicnaKarta" Width="1.5" PointX="7.75" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikAplikacije_tblIzdavalac" ManuallyRouted="false" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikAplikacije" ManuallyRouted="false" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblOtisak" ManuallyRouted="false" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblPotpis" ManuallyRouted="false" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblSlika" ManuallyRouted="false" />
-        <AssociationConnector Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikLicneKarte" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblIzdavalac" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblKorisnikAplikacije" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblKorisnikLicneKarte" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblLicnaKarta" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblOtisak" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblPotpi" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.tblSlika" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.vwIzdavalac" Width="1.5" PointX="2.75" PointY="7.125" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.vwKorisnikAplikacije" Width="1.5" PointX="5.75" PointY="7.125" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.vwKorisnikLicneKarte" Width="1.5" PointX="7.75" PointY="2.125" />
+        <EntityTypeShape EntityType="LicneKarteDBModel.vwLicnaKarta" Width="1.5" PointX="7.75" PointY="7.125" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikAplikacije_tblIzdavalac" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikAplikacije" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblOtisak" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblPotpis" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblKorisnikLicneKarte_tblSlika" />
+        <AssociationConnector Association="LicneKarteDBModel.FK_tblLicnaKarta_tblKorisnikLicneKarte" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

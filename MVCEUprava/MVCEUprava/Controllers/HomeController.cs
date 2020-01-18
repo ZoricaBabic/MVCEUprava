@@ -8,6 +8,7 @@ namespace MVCEUprava.Controllers
 {
     public class HomeController : Controller
     {
+        //ovde fali authorize
         public ActionResult Index()
         {
             return View();
