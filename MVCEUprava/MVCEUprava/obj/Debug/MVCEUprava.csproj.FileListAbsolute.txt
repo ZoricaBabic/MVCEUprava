@@ -1,4 +1,3 @@
-C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.csproj.CoreCompileInputs.cache
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\MVCEUprava.dll.config
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\MVCEUprava.dll
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\MVCEUprava.pdb
@@ -74,6 +73,7 @@ C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\System.Web.WebPa
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\Newtonsoft.Json.xml
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\Antlr3.Runtime.pdb
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.csproj.CoreCompileInputs.cache
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.csproj.CopyComplete
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.dll
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.pdb

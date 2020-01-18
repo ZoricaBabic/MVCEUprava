@@ -15,6 +15,7 @@ namespace MVCEUprava.Controllers
         private LicneKarteDBEntities db = new LicneKarteDBEntities();
 
         // GET: tblLicnaKarta
+        [CustomAuthorize]
         public ActionResult Index()
         {
             var tblLicnaKartas = db.tblLicnaKartas.Include(t => t.tblKorisnikAplikacije).Include(t => t.tblKorisnikLicneKarte);

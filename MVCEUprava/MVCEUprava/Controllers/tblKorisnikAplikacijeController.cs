@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using MVCEUprava.Models;
 
 namespace MVCEUprava.Controllers
@@ -48,10 +49,11 @@ namespace MVCEUprava.Controllers
 
             if(db.tblKorisnikAplikacijes.Where(x=>x.Email == tblKorisnikAplikacije.Email && x.Password==tblKorisnikAplikacije.Password).ToList().Count() == 1)
             {
+                FormsAuthentication.SetAuthCookie(tblKorisnikAplikacije.Email,false);
                 return RedirectToAction("Index","tblLicnaKarta");
             }
 
-            return View();
+            return View("Login", tblKorisnikAplikacije);
         }
 
         // GET: tblKorisnikAplikacije/Details/5
@@ -175,7 +177,7 @@ namespace MVCEUprava.Controllers
             return RedirectToAction("Index");
         }
 
-        //Registration
+        
 
 
         protected override void Dispose(bool disposing)
@@ -185,6 +187,26 @@ namespace MVCEUprava.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+    }
+
+    public class CustomAuthorizeAttribute : AuthorizeAttribute
+    {
+        private LicneKarteDBEntities db = new LicneKarteDBEntities();
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+
+            HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string name = ticket.Name;
+            string email = FormsAuthentication.FormsCookieName;
+
+            if(db.tblKorisnikAplikacijes.Where(x=> x.Email == name).ToList().Count() == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
