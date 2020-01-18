@@ -80,13 +80,20 @@ namespace MVCEUprava.Controllers
                 return View(tblKorisnikAplikacije);
             }
 
+            if (db.tblKorisnikAplikacijes.Where(x => x.Jmbg == tblKorisnikAplikacije.Jmbg).ToList().Count() > 0)
+            {
+                ModelState.AddModelError("Jmbg", "Korisnik sa unsenim JMBG-om već postoji.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
+
             if (ModelState.IsValid)
             {
                 db.tblKorisnikAplikacijes.Add(tblKorisnikAplikacije);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                return RedirectToAction("Index","tblLicnaKarta");
 
+            }
             ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Id", tblKorisnikAplikacije.Poslodavac);
             return View(tblKorisnikAplikacije);
         }
