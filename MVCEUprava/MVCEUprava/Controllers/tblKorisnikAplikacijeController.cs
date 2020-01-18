@@ -25,6 +25,7 @@ namespace MVCEUprava.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+            ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
             return View();
         }
 
@@ -63,8 +64,22 @@ namespace MVCEUprava.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ime,Prezime,Pol,Jmbg,Adresa,Mesto,BrojTelefona,DatumRodjenja,Email,Password,Poslodavac")] tblKorisnikAplikacije tblKorisnikAplikacije)
+        public ActionResult Registration([Bind(Include = "Id,Ime,Prezime,Pol,Jmbg,Adresa,Mesto,BrojTelefona,DatumRodjenja,Email,Password,Poslodavac,ConfirmPassword")] tblKorisnikAplikacije tblKorisnikAplikacije)
         {
+            if(tblKorisnikAplikacije.Password != tblKorisnikAplikacije.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Pogrešan unos.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
+
+            if(db.tblKorisnikAplikacijes.Where(x=>x.Email == tblKorisnikAplikacije.Email).ToList().Count() > 0)
+            {
+                ModelState.AddModelError("Email", "Korisnik sa unsenim e-mail-om već postoji.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
+
             if (ModelState.IsValid)
             {
                 db.tblKorisnikAplikacijes.Add(tblKorisnikAplikacije);
