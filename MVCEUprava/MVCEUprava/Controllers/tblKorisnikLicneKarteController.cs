@@ -24,22 +24,6 @@ namespace MVCEUprava.Controllers
             //return View(tblKorisnikLicneKartes.ToList());
             return RedirectToAction("Index", "tblLicnaKarta");
         }
-
-        // GET: tblKorisnikLicneKarte/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblKorisnikLicneKarte tblKorisnikLicneKarte = db.tblKorisnikLicneKartes.Find(id);
-            if (tblKorisnikLicneKarte == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblKorisnikLicneKarte);
-        }
-
         // GET: tblKorisnikLicneKarte/Create
         public ActionResult Create()
         {
@@ -315,10 +299,13 @@ namespace MVCEUprava.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+          
             tblKorisnikLicneKarte tblKorisnikLicneKarte = db.tblKorisnikLicneKartes.Find(id);
+            tblLicnaKarta tblLicna = db.tblLicnaKartas.Where(x => x.tblKorisnikLicneKarte.Id == tblKorisnikLicneKarte.Id).FirstOrDefault();
+            db.tblLicnaKartas.Remove(tblLicna);
             db.tblKorisnikLicneKartes.Remove(tblKorisnikLicneKarte);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "tblLicnaKarta");
         }
 
         private bool ValidateImage(HttpPostedFileBase image)

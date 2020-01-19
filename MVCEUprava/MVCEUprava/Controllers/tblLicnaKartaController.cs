@@ -23,21 +23,6 @@ namespace MVCEUprava.Controllers
             return View(tblLicnaKartas.ToList());
         }
 
-        // GET: tblLicnaKarta/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblLicnaKarta tblLicnaKarta = db.tblLicnaKartas.Find(id);
-            if (tblLicnaKarta == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblLicnaKarta);
-        }
-
         // GET: tblLicnaKarta/Create
         public ActionResult Create()
         {
@@ -114,7 +99,8 @@ namespace MVCEUprava.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tblLicnaKarta);
+
+            return RedirectToAction("Delete", "tblKorisnikLicneKarte", new { id = tblLicnaKarta.tblKorisnikLicneKarte.Id });
         }
 
         // POST: tblLicnaKarta/Delete/5
