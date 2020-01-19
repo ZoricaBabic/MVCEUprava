@@ -77,4 +77,3 @@ C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.csproj.CopyComplete
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.dll
 C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.pdb
-C:\Users\PANONIT\Documents\MVCEUprava\MVCEUprava\MVCEUprava\obj\Debug\MVCEUprava.csprojAssemblyReference.cache

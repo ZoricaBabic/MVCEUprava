@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -15,32 +13,62 @@ namespace MVCEUprava.Controllers
     {
         private LicneKarteDBEntities db = new LicneKarteDBEntities();
 
-        // GET: tblKorisnikAplikacije
+        //GET: tblKorisnikAplikacije
         public ActionResult Index()
         {
             var tblKorisnikAplikacijes = db.tblKorisnikAplikacijes.Include(t => t.tblIzdavalac);
             return View(tblKorisnikAplikacijes.ToList());
         }
 
-        //Registration Action
+        //Get registration
         [HttpGet]
         public ActionResult Registration()
         {
-            ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
-            return View();
+            HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie == null || authCookie.Value == "")
+            {
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
+                return View();
+            }
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string name = ticket.Name;
+
+            if (db.tblKorisnikAplikacijes.Where(x => x.Email == name).ToList().Count() == 0)
+            {
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
+                return View();
+            }
+            return RedirectToAction("Index", "tblLicnaKarta");
         }
 
-        //Login
+        //Get login
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie == null || authCookie.Value == "")
+            {
+                return View();
+            }
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string name = ticket.Name;
+
+            if (db.tblKorisnikAplikacijes.Where(x => x.Email == name).ToList().Count() == 0)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "tblLicnaKarta");
         }
 
         //Login
         [HttpPost]
         public ActionResult LoginUser([Bind(Include = "Email,Password")] tblKorisnikAplikacije tblKorisnikAplikacije)
         {
+            if(tblKorisnikAplikacije.Email == "admin111@gmail.com" && tblKorisnikAplikacije.Password == "admin111password")
+            {
+                FormsAuthentication.SetAuthCookie(tblKorisnikAplikacije.Email, false);
+                return RedirectToAction("Index", "tblLicnaKarta");
+            }
             if(db.tblKorisnikAplikacijes.Where(x=> x.Email == tblKorisnikAplikacije.Email).ToList().Count() == 0)
             {
                 ModelState.AddModelError("Email", "Napostojeća e-mail adresa.");
@@ -111,9 +139,11 @@ namespace MVCEUprava.Controllers
             {
                 db.tblKorisnikAplikacijes.Add(tblKorisnikAplikacije);
                 db.SaveChanges();
-                return RedirectToAction("Index","tblLicnaKarta");
+                FormsAuthentication.SetAuthCookie(tblKorisnikAplikacije.Email, false);
+                return RedirectToAction("Index", "tblLicnaKarta");
 
             }
+
             ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Id", tblKorisnikAplikacije.Poslodavac);
             return View(tblKorisnikAplikacije);
         }
@@ -177,9 +207,6 @@ namespace MVCEUprava.Controllers
             return RedirectToAction("Index");
         }
 
-        
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -187,26 +214,6 @@ namespace MVCEUprava.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-    }
-
-    public class CustomAuthorizeAttribute : AuthorizeAttribute
-    {
-        private LicneKarteDBEntities db = new LicneKarteDBEntities();
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
-        {
-
-            HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            string name = ticket.Name;
-            string email = FormsAuthentication.FormsCookieName;
-
-            if(db.tblKorisnikAplikacijes.Where(x=> x.Email == name).ToList().Count() == 0)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
