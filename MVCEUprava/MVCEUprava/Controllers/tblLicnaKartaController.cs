@@ -41,9 +41,10 @@ namespace MVCEUprava.Controllers
         // GET: tblLicnaKarta/Create
         public ActionResult Create()
         {
-            ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime");
-            ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime");
-            return View();
+            //ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime");
+            //ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime");
+            //return View();
+            return RedirectToAction("Create", "tblKorisnikLicnekarte");
         }
 
         // POST: tblLicnaKarta/Create

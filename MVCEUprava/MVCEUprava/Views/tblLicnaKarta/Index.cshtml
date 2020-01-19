@@ -4,15 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br/>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Kreiraj novu ličnu kartu", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.RegistarskiBroj)
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.tblKorisnikLicneKarte.Ime)*@
+            Ime i prezime
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DatumIzdavanja)
@@ -21,11 +26,14 @@
             @Html.DisplayNameFor(model => model.DatumIsteka)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)
+            @*@Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)*@
+            Kreirao
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tblKorisnikLicneKarte.Ime)
+            @*@Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)*@
+            Izdavalac
         </th>
+
         <th></th>
     </tr>
 
@@ -35,21 +43,25 @@
             @Html.DisplayFor(modelItem => item.RegistarskiBroj)
         </td>
         <td>
+            @Html.DisplayFor(modelItem =>item.tblKorisnikLicneKarte.Fullname)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.DatumIzdavanja)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DatumIsteka)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tblKorisnikAplikacije.Ime)
+            @Html.DisplayFor(modelItem => item.tblKorisnikAplikacije.Fullname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tblKorisnikLicneKarte.Ime)
+            @Html.DisplayFor(modelItem => item.tblKorisnikAplikacije.tblIzdavalac.Naziv)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

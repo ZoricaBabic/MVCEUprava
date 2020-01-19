@@ -13,6 +13,8 @@ namespace MVCEUprava.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class tblKorisnikAplikacije
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -51,6 +53,7 @@ namespace MVCEUprava.Models
         public string Password { get; set; }
         [Required(ErrorMessage = "Potrvrda lozinke je obavezna.")]
         public string ConfirmPassword { get; set; }
+        public string Fullname { get { return string.Format("{0} {1}", Ime, Prezime); } }
         public int Poslodavac { get; set; }
         public virtual tblIzdavalac tblIzdavalac { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

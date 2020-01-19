@@ -18,6 +18,12 @@ namespace MVCEUprava
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "tblKorisnikAplikacije", action = "Registration", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "LicnaKarta",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "tblLicnaKarta", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
