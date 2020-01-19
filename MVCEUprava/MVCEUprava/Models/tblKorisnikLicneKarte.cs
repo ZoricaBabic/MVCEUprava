@@ -28,7 +28,7 @@ namespace MVCEUprava.Models
         [Required(ErrorMessage = "Prezime je obavezno polje.")]
         public string Prezime { get; set; }
         [DisplayName("Datum rođenja")]
-        [Required(ErrorMessage = "Datum rođenja je obavezno polje.")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime DatumRodjenja { get; set; }
         [DisplayName("JMBG")]
         [Required(ErrorMessage = "JMBG je obavezno polje.")]
@@ -41,11 +41,8 @@ namespace MVCEUprava.Models
         public string Adresa { get; set; }
         [Required(ErrorMessage = "Mesto je obavezno polje.")]
         public string Mesto { get; set; }
-        [Required(ErrorMessage = "Slika je obavezan.")]
         public HttpPostedFileBase SlikaKorisnika { get; set; }
-        [Required(ErrorMessage = "Otisak je obavezan.")]
         public HttpPostedFileBase OtisakKorisnika { get; set; }
-        [Required(ErrorMessage = "Potpis je obavezan.")]
         public HttpPostedFileBase PotpisKorisnika { get; set; }
         public string Fullname { get { return string.Format("{0} {1}", Ime, Prezime); } }
         public int Potpis { get; set; }

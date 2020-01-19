@@ -56,6 +56,23 @@ namespace MVCEUprava.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Ime,Prezime,DatumRodjenja,Jmbg,Pol,Adresa,Mesto,Potpis,Otisak,Slika,SlikaKorisnika,OtisakKorisnika,PotpisKorisnika")] tblKorisnikLicneKarte tblKorisnikLicneKarte)
         {
+            if(tblKorisnikLicneKarte.SlikaKorisnika == null)
+            {
+                ModelState.AddModelError("SlikaKorisnika", "Slika mora da bude 189x189 i formata .jpg, .png, .gif ili .jpeg");
+                return View(tblKorisnikLicneKarte);
+            }
+
+            if (tblKorisnikLicneKarte.OtisakKorisnika == null)
+            {
+                ModelState.AddModelError("OtisakKorisnika", "Otisak mora da bude 189x189 i formata .jpg, .png, .gif ili .jpeg");
+                return View(tblKorisnikLicneKarte);
+            }
+
+            if (tblKorisnikLicneKarte.PotpisKorisnika == null)
+            {
+                ModelState.AddModelError("PotpisKorisnika", "Potpis mora da bude 189x189 i formata .jpg, .png, .gif ili .jpeg");
+                return View(tblKorisnikLicneKarte);
+            }
             tblPotpi potpis;
             tblOtisak otisak;
             tblSlika slika;
@@ -176,24 +193,101 @@ namespace MVCEUprava.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.Otisak = new SelectList(db.tblOtisaks, "Id", "Id", tblKorisnikLicneKarte.Otisak);
             ViewBag.Potpis = new SelectList(db.tblPotpis, "Id", "Id", tblKorisnikLicneKarte.Potpis);
             ViewBag.Slika = new SelectList(db.tblSlikas, "Id", "Id", tblKorisnikLicneKarte.Slika);
             return View(tblKorisnikLicneKarte);
         }
 
+
+
         // POST: tblKorisnikLicneKarte/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Ime,Prezime,DatumRodjenja,Jmbg,Pol,Adresa,Mesto,Potpis,Otisak,Slika")] tblKorisnikLicneKarte tblKorisnikLicneKarte)
+        public ActionResult Edit([Bind(Include = "Id,Ime,Prezime,DatumRodjenja,Jmbg,Pol,Adresa,Mesto,Potpis,Otisak,Slika,SlikaKorisnika,OtisakKorisnika,PotpisKorisnika")] tblKorisnikLicneKarte tblKorisnikLicneKarte)
         {
+            tblPotpi potpis = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblPotpi).FirstOrDefault();
+            tblOtisak otisak = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblOtisak).FirstOrDefault();
+            tblSlika slika = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblSlika).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                //slika
+                if (tblKorisnikLicneKarte.SlikaKorisnika!= null && ValidateImage(tblKorisnikLicneKarte.SlikaKorisnika))
+                {
+                    //image
+                    byte[] imageByte = null;
+                    using (var binaryReader = new BinaryReader(Request.Files["SlikaKorisnika"].InputStream))
+                    {
+                        //image = binaryReader.ReadBytes(Request.Files["SlikaKorisnika"].ContentLength);
+                        Image image = Image.FromStream(tblKorisnikLicneKarte.SlikaKorisnika.InputStream, true, true);
+                        imageByte = ImageToByte(image);
+                    }
+                    slika.Slika = imageByte;
+                    db.Entry(slika).State = EntityState.Modified;
+                }
+                else if (tblKorisnikLicneKarte.SlikaKorisnika != null)
+                {
+                    ModelState.AddModelError("SlikaKorisnika", "Slika mora da bude 189x189 i formata .jpg, .png, .gif ili .jpeg");
+                    return View(tblKorisnikLicneKarte);
+                }
+                //243x104 potpis
+                if (tblKorisnikLicneKarte.PotpisKorisnika != null && ValidateImage(tblKorisnikLicneKarte.PotpisKorisnika))
+                {
+                    //image
+                    byte[] image = null;
+                    using (var binaryReader = new BinaryReader(Request.Files["PotpisKorisnika"].InputStream))
+                    {
+                        //image = binaryReader.ReadBytes(Request.Files["SlikaKorisnika"].ContentLength);
+                        Image i = Image.FromStream(tblKorisnikLicneKarte.PotpisKorisnika.InputStream, true, true);
+                        image = ImageToByte(i);
+                    }
+
+                    potpis.Potpis = image;
+                    db.Entry(potpis).State = EntityState.Modified;
+                }
+                else if(tblKorisnikLicneKarte.PotpisKorisnika != null)
+                {
+                    ModelState.AddModelError("PotpisKorisnika", "Potpis korisnika mora da bude 189x189  i formata .jpg, .png, .gif ili .jpeg");
+                    return View(tblKorisnikLicneKarte);
+                }
+
+                //612x509 otisak
+                if (tblKorisnikLicneKarte.OtisakKorisnika != null && ValidateImage(tblKorisnikLicneKarte.OtisakKorisnika))
+                {
+                    //image
+                    byte[] image = null;
+                    using (var binaryReader = new BinaryReader(Request.Files["OtisakKorisnika"].InputStream))
+                    {
+                        Image i = Image.FromStream(tblKorisnikLicneKarte.OtisakKorisnika.InputStream, true, true);
+                        image = ImageToByte(i);
+                    }
+                    otisak.Otisak = image;
+                    db.Entry(otisak).State = EntityState.Modified;
+                }
+                else if(tblKorisnikLicneKarte.OtisakKorisnika != null)
+                {
+                    ModelState.AddModelError("OtisakKorisnika", "Otisak korisnika mora da bude 189x189 i formata .jpg, .png, .gif ili .jpeg");
+                    return View(tblKorisnikLicneKarte);
+                }
+
+                db.SaveChanges();
+                tblKorisnikLicneKarte.Slika = slika.Id;
+                tblKorisnikLicneKarte.Potpis = potpis.Id;
+                tblKorisnikLicneKarte.Otisak = slika.Id;
                 db.Entry(tblKorisnikLicneKarte).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                tblLicnaKarta tblLicnaKarta = db.tblLicnaKartas.Where(x => x.KorisnikLicneKarte == tblKorisnikLicneKarte.Id).FirstOrDefault();
+                tblLicnaKarta.KorisnikLicneKarte = tblKorisnikLicneKarte.Id;
+                HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                string name = ticket.Name;
+                tblLicnaKarta.KorisnikAplikacije = db.tblKorisnikAplikacijes.Where(x => x.Email == name).Select(x => x.Id).FirstOrDefault();
+                db.Entry(tblLicnaKarta).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "tblLicnaKarta");
             }
             ViewBag.Otisak = new SelectList(db.tblOtisaks, "Id", "Id", tblKorisnikLicneKarte.Otisak);
             ViewBag.Potpis = new SelectList(db.tblPotpis, "Id", "Id", tblKorisnikLicneKarte.Potpis);
@@ -284,6 +378,27 @@ namespace MVCEUprava.Controllers
             {
                 return DateTime.Now.Date.AddYears(5);
             }
+        }
+
+        public FileContentResult Show(int id, string type)
+        {
+            LicneKarteDBEntities db = new LicneKarteDBEntities();
+            byte[] imageData = null;
+            if (type == "slika")
+            {
+                imageData = db.tblSlikas.Where(x => x.Id == id).Select(x => x.Slika).FirstOrDefault();
+            }
+
+            if (type == "otisak")
+            {
+                imageData = db.tblOtisaks.Where(x => x.Id == id).Select(x => x.Otisak).FirstOrDefault();
+            }
+
+            if (type == "potpis")
+            {
+                imageData = db.tblPotpis.Where(x => x.Id == id).Select(x => x.Potpis).FirstOrDefault();
+            }
+            return File(imageData, "image/jpg");
         }
 
         private byte[] ImageToByte(Image image)

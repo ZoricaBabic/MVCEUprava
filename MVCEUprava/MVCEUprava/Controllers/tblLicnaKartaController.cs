@@ -78,9 +78,10 @@ namespace MVCEUprava.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
-            ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
-            return View(tblLicnaKarta);
+            //ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
+            //ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
+            //return View(tblLicnaKarta);
+            return RedirectToAction("Edit", "tblKorisnikLicneKarte", new { id = tblLicnaKarta.tblKorisnikLicneKarte.Id });
         }
 
         // POST: tblLicnaKarta/Edit/5
