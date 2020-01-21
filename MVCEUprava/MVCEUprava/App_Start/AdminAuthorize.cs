@@ -1,13 +1,14 @@
 ﻿using MVCEUprava.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
 namespace MVCEUprava.App_Start
 {
-    public class AllUsersAuthorize: AuthorizeAttribute
+    public class AdminAuthorize: AuthorizeAttribute
     {
         private LicneKarteDBEntities db = new LicneKarteDBEntities();
         protected override bool AuthorizeCore(HttpContextBase httpContext)
@@ -20,11 +21,7 @@ namespace MVCEUprava.App_Start
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
             string name = ticket.Name;
             //string email = FormsAuthentication.FormsCookieName;
-            if(name == "admin111@gmail.com")
-            {
-                return true;
-            }
-            if (db.tblKorisnikAplikacijes.Where(x => x.Email == name).ToList().Count() == 0)
+            if (name != "admin111@gmail.com")
             {
                 return false;
             }

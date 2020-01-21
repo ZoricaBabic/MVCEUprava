@@ -24,6 +24,12 @@ namespace MVCEUprava
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "tblLicnaKarta", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Korisnici",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "tblKorisnikAplikacije", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MVCEUprava.Controllers
         private LicneKarteDBEntities db = new LicneKarteDBEntities();
 
         // GET: tblLicnaKarta
-        [CustomAuthorize]
+        [AllUsersAuthorize]
         public ActionResult Index()
         {
             var tblLicnaKartas = db.tblLicnaKartas.Include(t => t.tblKorisnikAplikacije).Include(t => t.tblKorisnikLicneKarte);
@@ -24,6 +24,7 @@ namespace MVCEUprava.Controllers
         }
 
         // GET: tblLicnaKarta/Create
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Create()
         {
             //ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime");
@@ -35,23 +36,24 @@ namespace MVCEUprava.Controllers
         // POST: tblLicnaKarta/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RegistarskiBroj,DatumIzdavanja,DatumIsteka,KorisnikAplikacije,KorisnikLicneKarte")] tblLicnaKarta tblLicnaKarta)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tblLicnaKartas.Add(tblLicnaKarta);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,RegistarskiBroj,DatumIzdavanja,DatumIsteka,KorisnikAplikacije,KorisnikLicneKarte")] tblLicnaKarta tblLicnaKarta)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tblLicnaKartas.Add(tblLicnaKarta);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
-            ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
-            return View(tblLicnaKarta);
-        }
+        //    ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
+        //    ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
+        //    return View(tblLicnaKarta);
+        //}
 
         // GET: tblLicnaKarta/Edit/5
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -72,22 +74,23 @@ namespace MVCEUprava.Controllers
         // POST: tblLicnaKarta/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,RegistarskiBroj,DatumIzdavanja,DatumIsteka,KorisnikAplikacije,KorisnikLicneKarte")] tblLicnaKarta tblLicnaKarta)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tblLicnaKarta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
-            ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
-            return View(tblLicnaKarta);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,RegistarskiBroj,DatumIzdavanja,DatumIsteka,KorisnikAplikacije,KorisnikLicneKarte")] tblLicnaKarta tblLicnaKarta)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(tblLicnaKarta).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.KorisnikAplikacije = new SelectList(db.tblKorisnikAplikacijes, "Id", "Ime", tblLicnaKarta.KorisnikAplikacije);
+        //    ViewBag.KorisnikLicneKarte = new SelectList(db.tblKorisnikLicneKartes, "Id", "Ime", tblLicnaKarta.KorisnikLicneKarte);
+        //    return View(tblLicnaKarta);
+        //}
 
         // GET: tblLicnaKarta/Delete/5
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,15 +107,15 @@ namespace MVCEUprava.Controllers
         }
 
         // POST: tblLicnaKarta/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tblLicnaKarta tblLicnaKarta = db.tblLicnaKartas.Find(id);
-            db.tblLicnaKartas.Remove(tblLicnaKarta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    tblLicnaKarta tblLicnaKarta = db.tblLicnaKartas.Find(id);
+        //    db.tblLicnaKartas.Remove(tblLicnaKarta);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

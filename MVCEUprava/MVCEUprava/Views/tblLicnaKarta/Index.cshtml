@@ -7,7 +7,10 @@
 <br/>
 
 <p>
-    @Html.ActionLink("Kreiraj novu ličnu kartu", "Create")
+    @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+    {
+        @Html.ActionLink("Kreiraj novu ličnu kartu", "Create")
+    }
 </p>
 <table class="table">
     <tr>
@@ -33,8 +36,10 @@
             @*@Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)*@
             Izdavalac
         </th>
-
-        <th></th>
+        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+        {
+            <th></th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -43,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.RegistarskiBroj)
         </td>
         <td>
-            @Html.DisplayFor(modelItem =>item.tblKorisnikLicneKarte.Fullname)
+            @Html.DisplayFor(modelItem => item.tblKorisnikLicneKarte.Fullname)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DatumIzdavanja)
@@ -57,11 +62,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.tblKorisnikAplikacije.tblIzdavalac.Naziv)
         </td>
-
+        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+        {
         <td>
             @Html.ActionLink("Modifikuj", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Obriši", "Delete", new { id = item.Id })
         </td>
+            
+        }
     </tr>
 }
 

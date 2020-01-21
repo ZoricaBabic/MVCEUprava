@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using MVCEUprava.App_Start;
 using MVCEUprava.Models;
 
 namespace MVCEUprava.Controllers
@@ -18,6 +19,7 @@ namespace MVCEUprava.Controllers
         private LicneKarteDBEntities db = new LicneKarteDBEntities();
 
         // GET: tblKorisnikLicneKarte
+        [AllUsersAuthorize]
         public ActionResult Index()
         {
             //var tblKorisnikLicneKartes = db.tblKorisnikLicneKartes.Include(t => t.tblOtisak).Include(t => t.tblPotpi).Include(t => t.tblSlika);
@@ -25,6 +27,7 @@ namespace MVCEUprava.Controllers
             return RedirectToAction("Index", "tblLicnaKarta");
         }
         // GET: tblKorisnikLicneKarte/Create
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Create()
         {
             ViewBag.Otisak = new SelectList(db.tblOtisaks, "Id", "Id");
@@ -38,6 +41,7 @@ namespace MVCEUprava.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Create([Bind(Include = "Id,Ime,Prezime,DatumRodjenja,Jmbg,Pol,Adresa,Mesto,Potpis,Otisak,Slika,SlikaKorisnika,OtisakKorisnika,PotpisKorisnika")] tblKorisnikLicneKarte tblKorisnikLicneKarte)
         {
             if(tblKorisnikLicneKarte.SlikaKorisnika == null)
@@ -166,6 +170,7 @@ namespace MVCEUprava.Controllers
             return View(tblKorisnikLicneKarte);
         }
         // GET: tblKorisnikLicneKarte/Edit/5
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -189,6 +194,7 @@ namespace MVCEUprava.Controllers
         // POST: tblKorisnikLicneKarte/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [KorisnikAplikacijeAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Ime,Prezime,DatumRodjenja,Jmbg,Pol,Adresa,Mesto,Potpis,Otisak,Slika,SlikaKorisnika,OtisakKorisnika,PotpisKorisnika")] tblKorisnikLicneKarte tblKorisnikLicneKarte)
@@ -280,6 +286,7 @@ namespace MVCEUprava.Controllers
         }
 
         // GET: tblKorisnikLicneKarte/Delete/5
+        [KorisnikAplikacijeAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -297,6 +304,7 @@ namespace MVCEUprava.Controllers
         // POST: tblKorisnikLicneKarte/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [KorisnikAplikacijeAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
           
@@ -367,26 +375,26 @@ namespace MVCEUprava.Controllers
             }
         }
 
-        public FileContentResult Show(int id, string type)
-        {
-            LicneKarteDBEntities db = new LicneKarteDBEntities();
-            byte[] imageData = null;
-            if (type == "slika")
-            {
-                imageData = db.tblSlikas.Where(x => x.Id == id).Select(x => x.Slika).FirstOrDefault();
-            }
+        //public FileContentResult Show(int id, string type)
+        //{
+        //    LicneKarteDBEntities db = new LicneKarteDBEntities();
+        //    byte[] imageData = null;
+        //    if (type == "slika")
+        //    {
+        //        imageData = db.tblSlikas.Where(x => x.Id == id).Select(x => x.Slika).FirstOrDefault();
+        //    }
 
-            if (type == "otisak")
-            {
-                imageData = db.tblOtisaks.Where(x => x.Id == id).Select(x => x.Otisak).FirstOrDefault();
-            }
+        //    if (type == "otisak")
+        //    {
+        //        imageData = db.tblOtisaks.Where(x => x.Id == id).Select(x => x.Otisak).FirstOrDefault();
+        //    }
 
-            if (type == "potpis")
-            {
-                imageData = db.tblPotpis.Where(x => x.Id == id).Select(x => x.Potpis).FirstOrDefault();
-            }
-            return File(imageData, "image/jpg");
-        }
+        //    if (type == "potpis")
+        //    {
+        //        imageData = db.tblPotpis.Where(x => x.Id == id).Select(x => x.Potpis).FirstOrDefault();
+        //    }
+        //    return File(imageData, "image/jpg");
+        //}
 
         private byte[] ImageToByte(Image image)
         {

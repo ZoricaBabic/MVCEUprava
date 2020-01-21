@@ -14,6 +14,7 @@ namespace MVCEUprava.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
+    using System.Web.Security;
 
     public partial class tblKorisnikAplikacije
     {
