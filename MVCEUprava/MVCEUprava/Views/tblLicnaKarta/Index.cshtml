@@ -7,7 +7,7 @@
 <br/>
 
 <p>
-    @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+    @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin@gmail.com")
     {
         @Html.ActionLink("Kreiraj novu ličnu kartu", "Create")
     }
@@ -36,7 +36,7 @@
             @*@Html.DisplayNameFor(model => model.tblKorisnikAplikacije.Ime)*@
             Izdavalac
         </th>
-        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin@gmail.com")
         {
             <th></th>
         }
@@ -62,7 +62,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.tblKorisnikAplikacije.tblIzdavalac.Naziv)
         </td>
-        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+        @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin@gmail.com")
         {
         <td>
             @Html.ActionLink("Modifikuj", "Edit", new { id = item.Id }) |

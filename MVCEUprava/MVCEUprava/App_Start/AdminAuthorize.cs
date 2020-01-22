@@ -21,7 +21,7 @@ namespace MVCEUprava.App_Start
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
             string name = ticket.Name;
             //string email = FormsAuthentication.FormsCookieName;
-            if (name != "admin111@gmail.com")
+            if (name != "admin@gmail.com")
             {
                 return false;
             }

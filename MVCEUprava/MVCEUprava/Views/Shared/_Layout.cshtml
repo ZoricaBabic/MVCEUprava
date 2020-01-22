@@ -37,12 +37,12 @@
             @if (System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName] != null)
             {
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="@Url.Action("Index", "tblLicnaKarta")" class="nav-link">
                         Lične karte<span class="sr-only">(current)</span>
                     </a>
                 </li>
-                @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name == "admin111@gmail.com")
+                @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name == "admin@gmail.com")
                 {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "tblIzdavalac")" class="nav-link">
@@ -56,14 +56,20 @@
             </a>
         </li>*@
 
-                @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin111@gmail.com")
+                @if (FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != "admin@gmail.com")
                 {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "tblKorisnikAplikacije")" class="nav-link">
-                            Korisnici<span class="sr-only"></span>
+                            Moji podaci<span class="sr-only"></span>
                         </a>
                     </li>
                 }
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Logout", "tblKorisnikAplikacije")" class="nav-link">
+                        Logout<span class="sr-only"></span>
+                    </a>
+                </li>
 
 
             </ul>
@@ -81,7 +87,6 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 

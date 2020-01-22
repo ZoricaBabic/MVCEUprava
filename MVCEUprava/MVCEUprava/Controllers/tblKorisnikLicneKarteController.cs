@@ -66,6 +66,12 @@ namespace MVCEUprava.Controllers
             tblSlika slika;
             if (ModelState.IsValid)
             {
+                //validate jmbg
+                if(db.tblKorisnikLicneKartes.Where(x=> x.Jmbg == tblKorisnikLicneKarte.Jmbg).Count() > 0)
+                {
+                    ModelState.AddModelError("Jmbg", "Korisnik sa unetim JMBG-om već postoji.");
+                    return View(tblKorisnikLicneKarte);
+                }
                 //slika
                 if (ValidateImage(tblKorisnikLicneKarte.SlikaKorisnika))
                 {
@@ -202,8 +208,17 @@ namespace MVCEUprava.Controllers
             tblPotpi potpis = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblPotpi).FirstOrDefault();
             tblOtisak otisak = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblOtisak).FirstOrDefault();
             tblSlika slika = db.tblKorisnikLicneKartes.Where(x => x.Id == tblKorisnikLicneKarte.Id).Select(x => x.tblSlika).FirstOrDefault();
+            tblKorisnikLicneKarte.Potpis = potpis.Id;
+            tblKorisnikLicneKarte.Otisak = otisak.Id;
+            tblKorisnikLicneKarte.Slika = slika.Id;
             if (ModelState.IsValid)
             {
+                //validate jmbg
+                if (db.tblKorisnikLicneKartes.Where(x => x.Jmbg == tblKorisnikLicneKarte.Jmbg && x.Id != tblKorisnikLicneKarte.Id).Count() > 0)
+                {
+                    ModelState.AddModelError("Jmbg", "Korisnik sa unetim JMBG-om već postoji.");
+                    return View(tblKorisnikLicneKarte);
+                }
                 //slika
                 if (tblKorisnikLicneKarte.SlikaKorisnika!= null && ValidateImage(tblKorisnikLicneKarte.SlikaKorisnika))
                 {

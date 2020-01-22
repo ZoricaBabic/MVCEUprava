@@ -52,7 +52,7 @@ namespace MVCEUprava.Models
         public string Email { get; set; }
         [Required(ErrorMessage = "Lozinka je obavezna.")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Potrvrda lozinke je obavezna.")]
+      
         public string ConfirmPassword { get; set; }
         public string Fullname { get { return string.Format("{0} {1}", Ime, Prezime); } }
         public int Poslodavac { get; set; }

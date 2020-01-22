@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -65,11 +66,22 @@ namespace MVCEUprava.Controllers
             return RedirectToAction("Index", "tblLicnaKarta");
         }
 
+        //Get login
+        [HttpGet]
+        [AllUsersAuthorize]
+        public ActionResult Logout()
+        {
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName);
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Registration", "tblKorisnikAplikacije");
+        }
+
         //Login
         [HttpPost]
         public ActionResult LoginUser([Bind(Include = "Email,Password")] tblKorisnikAplikacije tblKorisnikAplikacije)
         {
-            if(tblKorisnikAplikacije.Email == "admin111@gmail.com" && tblKorisnikAplikacije.Password == "admin111password")
+            if(tblKorisnikAplikacije.Email == "admin@gmail.com" && tblKorisnikAplikacije.Password == "admin")
             {
                 FormsAuthentication.SetAuthCookie(tblKorisnikAplikacije.Email, false);
                 return RedirectToAction("Index", "tblLicnaKarta");
@@ -88,29 +100,6 @@ namespace MVCEUprava.Controllers
 
             return View("Login", tblKorisnikAplikacije);
         }
-
-        //// GET: tblKorisnikAplikacije/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tblKorisnikAplikacije tblKorisnikAplikacije = db.tblKorisnikAplikacijes.Find(id);
-        //    if (tblKorisnikAplikacije == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tblKorisnikAplikacije);
-        //}
-
-        //// GET: tblKorisnikAplikacije/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Id");
-        //    return View();
-        //}
-
         //Register
         // POST: tblKorisnikAplikacije/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -171,7 +160,7 @@ namespace MVCEUprava.Controllers
             string name = ticket.Name;
             if (db.tblKorisnikAplikacijes.Where(x => x.Email == name && x.Id == tblKorisnikAplikacije.Id).ToList().Count() != 1)
             {
-                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Id", tblKorisnikAplikacije.Poslodavac);
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
                 return View(tblKorisnikAplikacije);
             }
 
@@ -185,22 +174,59 @@ namespace MVCEUprava.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [KorisnikAplikacijeAuthorize]
-        public ActionResult Edit([Bind(Include = "Id,Ime,Prezime,Pol,Jmbg,Adresa,Mesto,BrojTelefona,DatumRodjenja,Email,Password,Poslodavac")] tblKorisnikAplikacije tblKorisnikAplikacije)
+        public ActionResult Edit([Bind(Include = "Id,Ime,Prezime,Pol,Jmbg,Adresa,Mesto,BrojTelefona,DatumRodjenja,Email,Password,Poslodavac,ConfirmPassword")] tblKorisnikAplikacije tblKorisnikAplikacije)
         {
+
+            HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string name = ticket.Name;
+
+            if (tblKorisnikAplikacije.Password != tblKorisnikAplikacije.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Pogrešan unos.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
+
+            if (db.tblKorisnikAplikacijes.Where(x => x.Email == tblKorisnikAplikacije.Email).ToList().Count() > 1)
+            {
+                ModelState.AddModelError("Email", "Korisnik sa unsenim e-mail-om već postoji.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
+
+            if (db.tblKorisnikAplikacijes.Where(x => x.Jmbg == tblKorisnikAplikacije.Jmbg && x.Email != name).ToList().Count() > 0)
+            {
+                ModelState.AddModelError("Jmbg", "Korisnik sa unsenim JMBG-om već postoji.");
+                ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv", tblKorisnikAplikacije.Poslodavac);
+                return View(tblKorisnikAplikacije);
+            }
             if (ModelState.IsValid)
             {
-                HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                string name = ticket.Name;
                 if (db.tblKorisnikAplikacijes.Where(x => x.Email == name && x.Id == tblKorisnikAplikacije.Id).ToList().Count() != 1)
                 {
                     ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Id", tblKorisnikAplikacije.Poslodavac);
                     return View(tblKorisnikAplikacije);
                 }
-                db.Entry(tblKorisnikAplikacije).State = EntityState.Modified;
+                tblKorisnikAplikacije tblKorisnikAplikacijeUpdated = db.tblKorisnikAplikacijes.Where(x => x.Id == tblKorisnikAplikacije.Id).FirstOrDefault();
+                tblKorisnikAplikacijeUpdated.Id = tblKorisnikAplikacije.Id;
+                tblKorisnikAplikacijeUpdated.Ime = tblKorisnikAplikacije.Ime;
+                tblKorisnikAplikacijeUpdated.Prezime = tblKorisnikAplikacije.Prezime;
+                tblKorisnikAplikacijeUpdated.Pol = tblKorisnikAplikacije.Pol;
+                tblKorisnikAplikacijeUpdated.Jmbg = tblKorisnikAplikacije.Jmbg;
+                tblKorisnikAplikacijeUpdated.Adresa = tblKorisnikAplikacije.Adresa;
+                tblKorisnikAplikacijeUpdated.Mesto = tblKorisnikAplikacije.Mesto;
+                tblKorisnikAplikacijeUpdated.BrojTelefona = tblKorisnikAplikacije.BrojTelefona;
+                tblKorisnikAplikacijeUpdated.DatumRodjenja = tblKorisnikAplikacije.DatumRodjenja;
+                tblKorisnikAplikacijeUpdated.Email = tblKorisnikAplikacije.Email;
+                tblKorisnikAplikacijeUpdated.Password = tblKorisnikAplikacije.Password;
+                tblKorisnikAplikacijeUpdated.Poslodavac = tblKorisnikAplikacije.Poslodavac;
+                db.Entry(tblKorisnikAplikacijeUpdated).State = EntityState.Modified;
                 db.SaveChanges();
+                FormsAuthentication.SetAuthCookie(tblKorisnikAplikacije.Email, false);
                 return RedirectToAction("Index");
             }
+
             ViewBag.Poslodavac = new SelectList(db.tblIzdavalacs, "Id", "Naziv");
             return View(tblKorisnikAplikacije);
         }
@@ -245,10 +271,13 @@ namespace MVCEUprava.Controllers
                 return View(tblKorisnikAplikacije);
                 
             }
-            
             db.tblKorisnikAplikacijes.Remove(tblKorisnikAplikacije);
+
             db.SaveChanges();
-            return RedirectToAction("Index");
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName);
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Registration", "tblKorisnikAplikacije");
         }
 
         protected override void Dispose(bool disposing)
